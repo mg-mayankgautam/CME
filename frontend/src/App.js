@@ -6,6 +6,7 @@ function App() {
   const [organizationName, setOrganizationName] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [theme, setTheme] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [venue, setVenue] = useState('');
@@ -54,10 +55,35 @@ function App() {
       setDaysDifference(calculateDaysDifference(cmeStartDate, newDate));
     }
   };
+  const handleOrganizationNameChange = (e) => {
+    const value = e.target.value;
+    const regex = /^[a-zA-Z0-9\s'-,]{0,50}$/; // Allows up to 10 characters (alphabets, numbers, spaces, dashes, apostrophes)
+    if (regex.test(value)) {
+      setOrganizationName(value);
+    }
+  };
+
+  const [isValid, setIsValid] = useState(true);
+
+  const handleEmailChange = (e) =>{
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const value = e.target.value;
+   
+    // if(email.emailRegex.test(value)){
+      setEmail(value);
+      // setEmailError('');
+      setIsValid(emailRegex.test(value));
+    // }
+    // else{
+    //   setEmailError('Invalid Email Address');
+    // }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
+
     formData.append('organizationName', organizationName);
     formData.append('email', email);
     formData.append('address', address);
@@ -114,23 +140,27 @@ function App() {
 
     // Send formData to your API or server
     console.log('Form Data Submitted:', formData);
+
   };
 
   return (
     <div className='formPage'>
       <div className='form-header'>
-        <img src={logo} className='logo'/>
+        <img src={logo} className='logo' />
         <div>Online CME Registration</div>
       </div>
 
       <div className="form-container">
         <form onSubmit={handleSubmit}>
+
           <div className="form-row">
             <label>Name of the Organization conducting CME / Workshop / Seminar / Conference / Training programme</label>
             <input
-              type="text" placeholder=' ORGANISATION NAME'
+              type="text"
+              placeholder=' ORGANISATION NAME'
               value={organizationName}
-              onChange={(e) => setOrganizationName(e.target.value)}
+              maxLength={50}
+              onChange= {handleOrganizationNameChange}
             />
           </div>
 
@@ -139,8 +169,9 @@ function App() {
             <input
               type="text" placeholder='EMAIL'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
             />
+            {!isValid && <p style={{ color: 'red' }}>Invalid email address</p>}
           </div>
 
           <div className="form-row">
@@ -163,17 +194,19 @@ function App() {
 
           <div className="form-row">
             <label>Registration Number of Association / Organization with evidence (attach documents)</label>
-            <input
-              type="text"
-              value={registrationNumber}
-              onChange={(e) => setRegistrationNumber(e.target.value)}
-            />
-            <input
-              type="file"
-              onChange={(e) => handleFileChange(e, setRegistrationFiles)}
-              multiple
-              className="file-input"
-            />
+            <div className='dual_column'>
+              <input
+                type="text"
+                value={registrationNumber}
+                onChange={(e) => setRegistrationNumber(e.target.value)}
+              />
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, setRegistrationFiles)}
+                multiple
+                className="file-input"
+              />
+            </div>
           </div>
 
           <div className="form-row">
@@ -186,15 +219,32 @@ function App() {
           </div>
 
           <div className="form-row">
-            <label>Date of the CME / Workshop / Seminar / Conference / Training programme (From)</label>
-            <input
-              type="date"
-              value={cmeStartDate}
-              onChange={(e) => handleDateChange(e, setCmeStartDate, true)}
-            />
+            <label>Date of the CME / Workshop / Seminar / Conference / Training programme</label>
+
+            <div className='date_input_div'>
+              <div className='date_input_div_inner'>
+                <label>From</label>
+                <input
+                  className='date_box'
+                  type="date"
+                  value={cmeStartDate}
+                  onChange={(e) => handleDateChange(e, setCmeStartDate, true)}
+                />
+              </div>
+
+              <div className='date_input_div_inner'>
+                <label>To</label>
+                <input
+                  className='date_box'
+                  type="date"
+                  value={cmeEndDate}
+                  onChange={(e) => handleDateChange(e, setCmeEndDate, false)}
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="form-row">
+          {/* <div className="form-row">
             <label>Date of the CME / Workshop / Seminar / Conference / Training programme (To)</label>
             <input
               type="date"
@@ -204,7 +254,7 @@ function App() {
             <div>
               Number of days: {daysDifference}
             </div>
-          </div>
+          </div> */}
 
           <div className="form-row">
             <label>List of the Faculty with detailed qualification and experience.</label>
@@ -277,7 +327,10 @@ function App() {
               multiple
               className="file-input"
             />
+          </div>
 
+          {/*  */}
+          <div className="form-row">
             <label>Name of the Organizing Secretary</label>
             <input
               type="text"
@@ -291,7 +344,9 @@ function App() {
               multiple
               className="file-input"
             />
+
           </div>
+
 
           <div className="form-row">
             <label>Methodology to be adopted by the Organization viz. Lecture / Workshop / Hands On Training / Discussion / Audio- Visual Presentation etc.</label>
@@ -353,9 +408,13 @@ function App() {
             />
           </div>
 
-          <button type="submit" className="submit-button">Submit</button>
+          <button type="submit" 
+          className="submit-button"
+          // onClick={handleSubmit}
+          >Submit</button>
         </form>
       </div>
+
     </div>
   );
 }
