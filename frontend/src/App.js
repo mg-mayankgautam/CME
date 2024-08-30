@@ -3,21 +3,25 @@ import './FormStyle.css'; // Ensure this CSS file is in the same directory
 import logo from './hmcLogo.png';
 
 function App() {
-  const [organizationName, setOrganizationName] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [organizationName, setOrganizationName] = useState('');//regex lga
+  const [address, setAddress] = useState('');//regex lga
+  const [addressError, setAddressError] = useState('');
+  const [email, setEmail] = useState('');//regex lga
+  const [emailError, setEmailError] = useState('');//regex
   const [theme, setTheme] = useState('');
+  const [themeError, setThemeError] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
-  const [venue, setVenue] = useState('');
+  const [venue, setVenue] = useState('');//regex for 20 word input
   const [cmeStartDate, setCmeStartDate] = useState('');
   const [cmeEndDate, setCmeEndDate] = useState('');
   const [daysDifference, setDaysDifference] = useState(0);
   const [faculty1, setFaculty1] = useState('');
-  const [delegates, setDelegates] = useState('');
+  const [delegates, setDelegates] = useState('');//regex number only
+  const [delegatesError, setDelegatesError] = useState('');
   const [scheduleFile, setScheduleFile] = useState(null);
   const [exercise, setExercise] = useState('');
-  const [hours, setHours] = useState('');
+  const [hours, setHours] = useState('');//regx number only
+  const [hoursError, setHoursError] = useState('');
   const [chairman, setChairman] = useState('');
   const [secretary, setSecretary] = useState('');
   const [methodology, setMethodology] = useState('');
@@ -63,6 +67,30 @@ function App() {
     }
   };
 
+  const handleAddressChange = (e) => {
+    const value = e.target.value;
+    const addressRegex = /^[a-zA-Z0-9\s,.-]+$/; // Allows letters, numbers, spaces, commas, periods, and dashes
+
+    if (addressRegex.test(value)) {
+      setAddress(value);
+      setAddressError(''); // Clear error if address is valid
+    } else {
+      setAddressError('Invalid address. Only letters, numbers, spaces, commas, periods, and dashes are allowed.');
+    }
+  };
+
+  const handleThemeChange = (e) => {
+    const value = e.target.value;
+    const themeRegex = /^(\b\w+\b[\s,.]*){1,20}$/; // Allows up to 20 words
+
+    if (themeRegex.test(value)) {
+      setTheme(value);
+      setThemeError(''); // Clear error if theme is valid
+    } else {
+      setThemeError('The theme must be up to 20 words.');
+    }
+  };
+
   const [isValid, setIsValid] = useState(true);
 
   const handleEmailChange = (e) =>{
@@ -77,6 +105,30 @@ function App() {
     // else{
     //   setEmailError('Invalid Email Address');
     // }
+  };
+
+  const handleDelegatesChange = (e) => {
+    const value = e.target.value;
+    const numberRegex = /^\d+$/; // Allows only numbers
+
+    if (numberRegex.test(value)) {
+      setDelegates(value);
+      setDelegatesError(''); // Clear error if the input is valid
+    } else {
+      setDelegatesError('Please enter a valid number.');
+    }
+  };
+
+  const handleHoursChange = (e) => {
+    const value = e.target.value;
+    const numberRegex = /^\d+$/; // Allows only numbers
+
+    if (numberRegex.test(value)) {
+      setHours(value);
+      setHoursError(''); // Clear error if the input is valid
+    } else {
+      setHoursError('Please enter a valid number.');
+    }
   };
 
   const handleSubmit = (e) => {
@@ -179,8 +231,9 @@ function App() {
             <input
               type="text" placeholder='ADDRESS'
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={handleAddressChange}
             />
+            {addressError && <span className="error">{addressError}</span>}
           </div>
 
           <div className="form-row">
@@ -188,8 +241,9 @@ function App() {
             <input
               type="text" placeholder='THEME'
               value={theme}
-              onChange={(e) => setTheme(e.target.value)}
+              onChange={handleThemeChange}
             />
+           {themeError && <span className="error">{themeError}</span>}
           </div>
 
           <div className="form-row">
@@ -271,8 +325,9 @@ function App() {
             <input
               type="number"
               value={delegates}
-              onChange={(e) => setDelegates(e.target.value)}
+              onChange={handleDelegatesChange}
             />
+            {delegatesError && <span className="error">{delegatesError}</span>}
           </div>
 
           <div className="form-row">
@@ -309,8 +364,10 @@ function App() {
             <input
               type="number"
               value={hours}
-              onChange={(e) => setHours(e.target.value)}
+              onChange={handleHoursChange}
             />
+            {hoursError && <span className="error">{hoursError}</span>}
+
           </div>
 
           <div className="form-row">
