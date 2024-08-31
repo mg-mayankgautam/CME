@@ -4,6 +4,7 @@ import logo from './hmcLogo.png';
 
 function App() {
   const [organizationName, setOrganizationName] = useState('');//regex lga
+  const [orgNameError, setOrgNameError] = useState('');
   const [address, setAddress] = useState('');//regex lga
   const [addressError, setAddressError] = useState('');
   const [email, setEmail] = useState('');//regex lga
@@ -12,6 +13,7 @@ function App() {
   const [themeError, setThemeError] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [venue, setVenue] = useState('');//regex for 20 word input
+  const [venueError, setVenueError] = useState('');
   const [cmeStartDate, setCmeStartDate] = useState('');
   const [cmeEndDate, setCmeEndDate] = useState('');
   const [daysDifference, setDaysDifference] = useState(0);
@@ -59,19 +61,24 @@ function App() {
       setDaysDifference(calculateDaysDifference(cmeStartDate, newDate));
     }
   };
+
   const handleOrganizationNameChange = (e) => {
     const value = e.target.value;
-    const regex = /^[a-zA-Z0-9\s'-,]{0,50}$/; // Allows up to 10 characters (alphabets, numbers, spaces, dashes, apostrophes)
-    if (regex.test(value)) {
+    const orgNameRegex = /^[a-zA-Z0-9\s,'.-]{1,50}$/; // Allows up to 50 characters
+  
+    if (value === '' || orgNameRegex.test(value)) {
       setOrganizationName(value);
+      setOrgNameError('');
+    } else {
+      setOrgNameError('Invalid organization name');
     }
   };
 
   const handleAddressChange = (e) => {
     const value = e.target.value;
-    const addressRegex = /^[a-zA-Z0-9\s,.-]+$/; // Allows letters, numbers, spaces, commas, periods, and dashes
+    const addressRegex = /^[a-zA-Z0-9\s,/.-]{1,50}$/; // Allows letters, numbers, spaces, commas, periods, and dashes
 
-    if (addressRegex.test(value)) {
+    if (value ==='' || addressRegex.test(value)) {
       setAddress(value);
       setAddressError(''); // Clear error if address is valid
     } else {
@@ -81,9 +88,9 @@ function App() {
 
   const handleThemeChange = (e) => {
     const value = e.target.value;
-    const themeRegex = /^(\b\w+\b[\s,.]*){1,20}$/; // Allows up to 20 words
+    const themeRegex = /^[a-zA-Z0-9\s,.]{1,20}$/;
 
-    if (themeRegex.test(value)) {
+    if (value === '' || themeRegex.test(value)) {
       setTheme(value);
       setThemeError(''); // Clear error if theme is valid
     } else {
@@ -111,7 +118,7 @@ function App() {
     const value = e.target.value;
     const numberRegex = /^\d+$/; // Allows only numbers
 
-    if (numberRegex.test(value)) {
+    if (value === '' || numberRegex.test(value)) {
       setDelegates(value);
       setDelegatesError(''); // Clear error if the input is valid
     } else {
@@ -123,11 +130,23 @@ function App() {
     const value = e.target.value;
     const numberRegex = /^\d+$/; // Allows only numbers
 
-    if (numberRegex.test(value)) {
+    if (value === '' || numberRegex.test(value)) {
       setHours(value);
       setHoursError(''); // Clear error if the input is valid
     } else {
       setHoursError('Please enter a valid number.');
+    }
+  };
+
+  const handleVenueChange = (e) => {
+    const value = e.target.value;
+    const venueRegex = /^[a-zA-Z0-9\s,/.-]{1,50}$/; // Allows letters, numbers, spaces, commas, periods, and dashes
+
+    if (value ==='' || venueRegex.test(value)) {
+      setVenue(value);
+      setVenueError(''); // Clear error if address is valid
+    } else {
+      setVenueError('Invalid address. Only letters, numbers, spaces, commas, periods, and dashes are allowed.');
     }
   };
 
@@ -209,7 +228,7 @@ function App() {
             <label>Name of the Organization conducting CME / Workshop / Seminar / Conference / Training programme</label>
             <input
               type="text"
-              placeholder=' ORGANISATION NAME'
+              placeholder='Organization Name'
               value={organizationName}
               maxLength={50}
               onChange= {handleOrganizationNameChange}
@@ -219,17 +238,17 @@ function App() {
           <div className="form-row">
             <label>Email</label>
             <input
-              type="text" placeholder='EMAIL'
+              type="text" placeholder='E-Mail'
               value={email}
               onChange={handleEmailChange}
             />
-            {!isValid && <p style={{ color: 'red' }}>Invalid email address</p>}
+            {!isValid && <span className='error'>Invalid email address</span>}
           </div>
 
           <div className="form-row">
             <label>Address</label>
             <input
-              type="text" placeholder='ADDRESS'
+              type="text" placeholder='Address'
               value={address}
               onChange={handleAddressChange}
             />
@@ -239,7 +258,7 @@ function App() {
           <div className="form-row">
             <label>Theme</label>
             <input
-              type="text" placeholder='THEME'
+              type="text" placeholder='Theme'
               value={theme}
               onChange={handleThemeChange}
             />
@@ -266,10 +285,12 @@ function App() {
           <div className="form-row">
             <label>Venue of the CME / Workshop / Seminar / Conference / Training programme</label>
             <input
-              type="text" placeholder='VENUE'
+              type="text" placeholder='Venue'
               value={venue}
-              onChange={(e) => setVenue(e.target.value)}
+              onChange={handleVenueChange}
             />
+            {venueError && <span className="error">{venueError}</span>}
+
           </div>
 
           <div className="form-row">

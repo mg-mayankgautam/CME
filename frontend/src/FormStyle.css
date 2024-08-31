@@ -108,11 +108,6 @@
 }
 
 
-
-.form-row .file-input {
-  /* margin-top: 10px; */
-}
-
 .submit-button {
   background-color: #435ebe;
   color: white;
@@ -129,6 +124,11 @@
 
 .submit-button:hover {
   background-color: #0056b3;
+}
+
+.submit-button[disabled]{
+  background-color: #607080;
+  cursor: not-allowed;
 }
 
 .faculty-inputs input {
@@ -160,4 +160,10 @@
 .dual_column {
   display: flex;
   gap: 10px;
+}
+
+
+
+.error{
+  color: #a00202 !important;
 }
