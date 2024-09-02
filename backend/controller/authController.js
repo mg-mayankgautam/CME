@@ -2,15 +2,9 @@
 // const userDB=require("../models/usersDB.js")
 
 
-module.exports.adminlogin=async(req,res)=>{
+module.exports.submitformdata=async(req,res)=>{
 
-    console.log(req.body);
-   let ID=req.body.ID;
-   let Pwd=req.body.Pwd
+   console.log(req.files);
 
-}
 
-module.exports.adminInfo=async(req,res)=>{
-
-    console.log(req.user, 'here')
 }

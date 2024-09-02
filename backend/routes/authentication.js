@@ -6,10 +6,10 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 require("dotenv").config();
 
-// const authController = require('../controller/authController');
+const authController = require('../controller/authController');
 
 
-// router.post('/signUp',authController.signUp)
+router.post('/addformdata',upload.any("PDF"),authController.submitformdata)
 // router.post('/addrecruitingcompany',upload.array("image"), authController.addRecruitingCompany)
 
 
