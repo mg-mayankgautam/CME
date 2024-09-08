@@ -29,11 +29,15 @@ app.use(cors(
 
 
 app.use((req, res, next) => {
+
+//  console.log(req.cookies);
+
     res.setHeader(
         "Access-Control-Allow-Origin",
      
         "http://localhost:3000"
     );
+    res.header('Access-Control-Allow-Credentials', true);
     res.setHeader(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -42,6 +46,7 @@ app.use((req, res, next) => {
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, OPTIONS"
     );
+    
     next();
 })
 
@@ -86,24 +91,26 @@ app.use(express.static(path.join(__dirname, 'photos')));
 const AuthRouter = require('./routes/authentication.js');
 app.use('/', AuthRouter);
 
+const refreshRouter = require('./routes/refresh.js');
+app.use('/refresh',refreshRouter)
 
 
 //////USE BELOW CODE WITH MONGOOSE  
 //////
 
-// mongoose.connect(process.env.MONGODB_URL, {
-//     //    useNewUrlParser: true,
-//     //    useUnifiedTopology: true,
-//     // useCreateIndex: true
-// })
-//     .then(() => {
-//         app.listen(PORT, () => {
-//             console.log(`http://localhost:` + PORT);
-//         })
-//     })
-//     .catch(err => { console.error(err); });
+mongoose.connect(process.env.MONGODB_URL, {
+    //    useNewUrlParser: true,
+    //    useUnifiedTopology: true,
+    // useCreateIndex: true
+})
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`http://localhost:` + PORT);
+        })
+    })
+    .catch(err => { console.error(err); });
 
-app.listen(PORT, () => {
-                console.log(`http://localhost:` + PORT);
-            })
+// app.listen(PORT, () => {
+//                 console.log(`http://localhost:` + PORT);
+//             })
 // console.log(`http://localhost:` + PORT);

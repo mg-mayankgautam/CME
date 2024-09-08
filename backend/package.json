@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.588.0",
-    "@aws-sdk/s3-request-presigner": "^3.588.0",
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@aws-sdk/s3-request-presigner": "^3.637.0",
     "body-parser": "^1.20.2",
     "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.6",
