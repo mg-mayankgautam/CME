@@ -16,10 +16,10 @@ const crypto = require('crypto');
 
 const bucketName = "test-cmeportal"
 const bucketRegion = "ap-south-1"
-const accessKeyId = "AKIA6GBMBOXSFEL2MLP5"
-const secretAccessKey = "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"
-
-
+// const accessKeyId = "AKIA6GBMBOXSFEL2MLP5"  
+// const secretAccessKey = "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"
+const accessKeyId = process.env.accessKeyId
+const secretAccessKey = process.env.secretAccessKey
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const { GetObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const { hasSubscribers } = require("diagnostics_channel");
