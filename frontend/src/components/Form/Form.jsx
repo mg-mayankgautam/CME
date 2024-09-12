@@ -3,6 +3,7 @@ import './FormStyle.css'; // Ensure this CSS file is in the same directory
 import logo from '../../assets/hmcLogo.png';
 import { useState } from 'react';
 import axios from 'axios';
+import Footer from '../Footer/Footer'
 
 
 const Form = () => {
@@ -43,6 +44,8 @@ const Form = () => {
   const [isInternationalFaculty, setIsInternationalFaculty] = useState('');
 
 
+
+  const [otpInput, setOtpInput] = useState('false')
 
 
   //below states are for checking file size limits
@@ -192,16 +195,6 @@ const Form = () => {
     formData.append('address', address);
     formData.append('theme', theme);
     formData.append('registrationNumber', registrationNumber);
-
-    //   if (registrationFiles) {
-    //     for (let i = 0; i < registrationFiles.length; i++) {
-    //       formData.append('registrationFiles', registrationFiles[i]);
-    //     }
-    //   }
-
-
-
-
     formData.append('venue', venue);
     formData.append('cmeStartDate', cmeStartDate);
     formData.append('cmeEndDate', cmeEndDate);
@@ -214,70 +207,37 @@ const Form = () => {
     formData.append('chairman', chairman);
     formData.append('secretary', secretary);
     formData.append('methodology', methodology);
-    formData.append('permissionNumber', permissionNumber);
-    formData.append('permissionDate', permissionDate);
+    formData.append('internationalPermissionNumber', permissionNumber);
+    formData.append('internationalPermissionDate', permissionDate);
 
 
     //  Registration Number of Association / Organization with evidence (attach documents)
 
-    formData.append('PDF', PDF1);
+    formData.append('Registration Number of Association / Organization with evidence', PDF1);
 
 
     //List of the Faculty with detailed qualification and experience.
 
-    formData.append('PDF2', PDF2);
-
-    //   if (facultyDocuments) {
-    //     for (let i = 0; i < facultyDocuments.length; i++) {
-    //       formData.append('facultyDocuments', facultyDocuments[i]);
-    //     }
-    //   }
-
-    //   //List of Topics
-    //   if (topicDocuments) {
-    //     for (let i = 0; i < topicDocuments.length; i++) {
-    //       formData.append('topicDocuments', topicDocuments[i]);
-    //     }
-    //   }
-
-    //   //Detailed programme schedule mentioning time (upload file only)
-    //   if (scheduleFile) {
-    //     for (let i = 0; i < scheduleFile.length; i++) {
-    //       formData.append('scheduleFile', scheduleFile[i]);
-    //     }
-    //   }
-
-    //   //Medical Registration Certificate of the Organizing Chairman
-    //   if (chairmanCertificate) {
-    //     for (let i = 0; i < chairmanCertificate.length; i++) {
-    //       formData.append('chairmanCertificate', chairmanCertificate[i]);
-    //     }
-    //   }
-
-    //   //Medical Registration Certificate of the Organizing Secretary
-    //   if (secretaryCertificate) {
-    //     for (let i = 0; i < secretaryCertificate.length; i++) {
-    //       formData.append('secretaryCertificate', secretaryCertificate[i]);
-    //     }
-    //   }
-
-    //   //If Any Other Supporting Documents
-    //   if (supportingFiles) {
-    //     for (let i = 0; i < supportingFiles.length; i++) {
-    //       formData.append('supportingFiles', supportingFiles[i]);
-    //     }
-    //   }
+    formData.append('List of the Faculty with detailed qualification and experience', PDF2);
+    formData.append('Detailed programme schedule mentioning time, subject and the name of the Speaker', PDF3);
+    formData.append('List of Topics', PDF4);
+    formData.append('Medical Registration Certificate of the Organizing Chairman', PDF5);
+    formData.append('Medical Registration Certificate of the Organizing Secretary', PDF6);
+    formData.append('Any Other Supporting Documents', PDF7);
 
 
-    // Send formData to your API or server
 
     console.log('Form Data Submitted:', formData);
 
     try {
-      const formadata = await axios.post('http://localhost:4700/addformdata', formData,
+      const formdata = await axios.post('http://localhost:4700/addformdata', formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
-      )
 
+
+     
+      )
+      console.log(formdata)
+      // if(formdata.data){setOtpInput(e=>!e)}
 
 
 
@@ -290,6 +250,11 @@ const Form = () => {
 
   const [PDF1, setPDF1] = useState('second')
   const [PDF2, setPDF2] = useState('second')
+  const [PDF3, setPDF3] = useState('second')
+  const [PDF4, setPDF4] = useState('second')
+  const [PDF5, setPDF5] = useState('second')
+  const [PDF6, setPDF6] = useState('second')
+  const [PDF7, setPDF7] = useState('second')
 
 
 
@@ -298,352 +263,433 @@ const Form = () => {
   //not needed anymore
 
 
-  const handleFileChange = (e) => {
-    const files = e.target.files[0];
-    console.log(files.size
-      // file size should be less than  3mb = 3000000 bytes
-    )
+  // const handleFileChange = (e) => {
+  //   const files = e.target.files[0];
+  //   console.log(files.size
+  //     // file size should be less than  3mb = 3000000 bytes
+  //   )
 
-    if (files.size > 3000000) {
-      console.log('PDF too big')
-    }
+  //   if (files.size > 3000000) {
+  //     console.log('PDF too big')
+  //   }
 
-    else if (files.size < 30000) {
+  //   else if (files.size < 30000) {
 
-      setPDF1(e.target.files[0]);
-
-
-    }
+  //     setPDF1(e.target.files[0]);
 
 
-  };
+  //   }
+
+
+  // };
 
   return (
 
+    <>
 
+      <div className='formPage'>
+        <div className='form-header'>
+          <img src={logo} className='logo' />
+          <div>CME Portal</div>
+        </div>
 
-    <div className='formPage'>
-      <div className='form-header'>
-        <img src={logo} className='logo' />
-        <div>Online CME Registration</div>
-      </div>
-
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-
-          <div className='formWrap'>
-            <div className="form-row">
-              {/* allowed:- a-z,A-z,0-9, charachters allowed:-[,.-']   */}
-              <label>Name of the Organization conducting CME / Workshop / Seminar / Conference / Training programme</label>
-              <input
-                type="text"
-                // placeholder='Organization Name'
-                value={organizationName}
-                maxLength={50}
-                onChange={handleOrganizationNameChange}
-              />
-            </div>
-
-            <div className="form-row">
-              <label>Email</label>
-              <input
-                type="text"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              {!isValid && <span className='error'>Invalid email address</span>}
-            </div>
-
-            <div className="form-row">
-              <label>Address</label>
-              <input
-                type="text"
-                value={address}
-                onChange={handleAddressChange}
-              />
-              {addressError && <span className="error">{addressError}</span>}
-            </div>
-
-            <div className="form-row">
-              {/* allowed:- a-z,A-z,0-9, charachters allowed:-[,.]   */}
-              <label>Theme</label>
-              <input
-                type="text"
-                value={theme}
-                onChange={handleThemeChange}
-              />
-              {themeError && <span className="error">{themeError}</span>}
-            </div>
+        <div className='formPageContainer'>
+          <div className='formSubHead'>
+            Online Registration
           </div>
 
-          <div className="form-row">
-            <label>Registration Number of Association / Organization with evidence (attach documents)</label>
-            <div className='dual_column_input'>
-              <input
-                type="text"
-                value={registrationNumber}
-                // value={RegistrationNumberregex}
+          {!otpInput?
+            <div className="form-container">
+            <form onSubmit={handleSubmit}>
 
-                onChange={handleRegistrationNumChange}
-              // onChange={(e)=>{setRegistrationNumber(e.target.value)}}
-              />
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file.size < 3000000) {
-                    setPDF1(file);
-                  } else {
-                    console.log('Size too big, select a smaller file');
-                  }
-                }}
-                multiple
-                className="file-input inputFile"
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <label>Venue of the CME / Workshop / Seminar / Conference / Training programme</label>
-            <input
-              type="text" placeholder='Venue'
-              value={venue}
-              onChange={handleVenueChange}
-            />
-            {venueError && <span className="error">{venueError}</span>}
-
-          </div>
-
-          <div className="form-row">
-            <label>Date of the CME / Workshop / Seminar / Conference / Training programme</label>
-
-            <div className='date_input_div'>
-              <div className='date_input_div_inner'>
-                <label>From</label>
-                <input
-                  className='date_box'
-                  type="date"
-                  value={cmeStartDate}
-                  onChange={(e) => handleDateChange(e, setCmeStartDate, true)}
-                />
-              </div>
-
-              <div className='date_input_div_inner'>
-                <label>To</label>
-                <input
-                  className='date_box'
-                  type="date"
-                  value={cmeEndDate}
-                  onChange={(e) => handleDateChange(e, setCmeEndDate, false)}
-                />
-              </div>
-            </div>
-            {daysDifference <= 0 ? <div style={{ color: 'red' }}>
-              To date can't be earlier than From date
-            </div> : <div>Number of days: {daysDifference}</div>}
-          </div>
-
-
-
-          {/* <div className="form-row">
-            <label>Date of the CME / Workshop / Seminar / Conference / Training programme (To)</label>
-            <input
-              type="date"
-              value={cmeEndDate}
-              onChange={(e) => handleDateChange(e, setCmeEndDate, false)}
-            />
-            <div>
-              Number of days: {daysDifference}
-            </div>
-          </div> */}
-
-          <div className='formWrap'>
-
-            <div className="form-row">
-              <label>List of the Faculty with detailed qualification and experience.</label>
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file.size < 3000000) {
-                    setPDF2(file);
-                  } else {
-                    console.log('Size too big, select a smaller file');
-                  }
-                }}
-                multiple
-                className="file-input inputFile"
-              />
-            </div>
-
-            <div className="form-row">
-              <label>Expected number of attending delegates</label>
-              <input
-                type="number"
-                value={delegates}
-                onChange={handleDelegatesChange}
-              />
-              {delegatesError && <span className="error">{delegatesError}</span>}
-            </div>
-
-            <div className="form-row">
-              <label>List of Topics</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, setTopicDocuments)}
-                multiple
-                className="file-input"
-              />
-            </div>
-
-            <div className="form-row">
-              <label>Detailed programme schedule mentioning time, subject and the name of the Speaker (upload file only)</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, setScheduleFile)}
-                multiple
-                className="file-input"
-              />
-            </div>
-
-            <div className="form-row">
-              <label>Exercises to be covered in the CME / Workshop / Seminar / Training Programme</label>
-              <input
-                type="text"
-                value={exercise}
-                onChange={(e) => setExercise(e.target.value)}
-              />
-            </div>
-
-            <div className="form-row">
-              <label>Expected No. of Hours</label>
-              <input
-                type="number"
-                value={hours}
-                onChange={handleHoursChange}
-              />
-              {hoursError && <span className="error">{hoursError}</span>}
-
-            </div>
-
-          </div>
-
-          <div className='formWrap'>
-            <div className="form-row">
-              <label>Name of the Organizing Chairman</label>
-              <input
-                type="text"
-                value={chairman}
-                onChange={(e) => setChairman(e.target.value)}
-              />
-            </div>
-            <div className='form-row'>
-              <label>Medical Registration Certificate of the Organizing Chairman</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, setChairmanCertificate)}
-                multiple
-                className="file-input"
-              />
-            </div>
-
-            {/*  */}
-            <div className="form-row">
-              <label>Name of the Organizing Secretary</label>
-              <input
-                type="text"
-                value={secretary}
-                onChange={(e) => setSecretary(e.target.value)}
-              />
-            </div>
-
-            <div className='form-row'>
-              <label>Medical Registration Certificate of the Organizing Secretary</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, setSecretaryCertificate)}
-                multiple
-                className="file-input"
-              />
-
-            </div>
-          </div>
-
-
-          <div className="form-row">
-            <label>Methodology to be adopted by the Organization viz. Lecture / Workshop / Hands On Training / Discussion / Audio- Visual Presentation etc.</label>
-            <textarea
-              value={methodology}
-              onChange={(e) => setMethodology(e.target.value)}
-            />
-          </div>
-
-          <div className='form-row'>
-            <label>Is there any International Faculty Involved?</label>
-            <div className='form-flex'>
-              <input
-                type="radio"
-                name='isInternationalFaculty'
-                id='yes'
-                value="Yes"
-                checked={isInternationalFaculty === 'Yes'}
-                onChange={(e) => setIsInternationalFaculty(e.target.value)}
-              />
-              <label htmlFor="yes" className='cursor-pointer'>Yes</label>
-
-              <input
-                type="radio"
-                name='isInternationalFaculty'
-                id='no'
-                value="No"
-                checked={isInternationalFaculty === 'No'}
-                onChange={(e) => setIsInternationalFaculty(e.target.value)}
-              />
-              <label htmlFor="no" className='cursor-pointer'>No</label>
-            </div>
-          </div>
-
-          {isInternationalFaculty === 'Yes' && (
-            <div className='formWrap'>
               <div className="form-row">
-                <label>Prior Permission of MCI in case of Foreign faculties (if applicable)</label>
+                {/* allowed:- a-z,A-z,0-9, charachters allowed:-[,.-']   */}
+                <label>Name of the Organization conducting CME / Workshop / Seminar / Conference / Training programme</label>
                 <input
                   type="text"
-                  value={permissionNumber}
-                  onChange={(e) => setPermissionNumber(e.target.value)}
+                  // placeholder='Organization Name'
+                  value={organizationName}
+                  maxLength={50}
+                  onChange={handleOrganizationNameChange}
                 />
               </div>
+
+              <div className='formWrap3'>
+
+                <div className="form-row">
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+                  {!isValid && <span className='error'>Invalid email address</span>}
+                </div>
+
+                <div className="form-row">
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    value={address}
+                    onChange={handleAddressChange}
+                  />
+                  {addressError && <span className="error">{addressError}</span>}
+                </div>
+
+                <div className="form-row">
+                  {/* allowed:- a-z,A-z,0-9, charachters allowed:-[,.]   */}
+                  <label>Theme</label>
+                  <input
+                    type="text"
+                    value={theme}
+                    onChange={handleThemeChange}
+                  />
+                  {themeError && <span className="error">{themeError}</span>}
+                </div>
+              </div>
+
+              <div className='formWrap'>
+                {/* <div className='formWrap'> */}
+                <div className="form-row">
+                  <label>Date of the CME / Workshop / Seminar / Conference / Training programme</label>
+
+                  <div className='date_input_div'>
+                    <div className='date_input_div_inner'>
+                      <label>From</label>
+                      <input
+                        className='date_box'
+                        type="date"
+                        value={cmeStartDate}
+                        onChange={(e) => handleDateChange(e, setCmeStartDate, true)}
+                      />
+                    </div>
+
+                    <div className='date_input_div_inner'>
+                      <label>To</label>
+                      <input
+                        className='date_box'
+                        type="date"
+                        value={cmeEndDate}
+                        onChange={(e) => handleDateChange(e, setCmeEndDate, false)}
+                      />
+                    </div>
+                  </div>
+                  {cmeStartDate && cmeEndDate && daysDifference <= 0 ? 
+                  <div className='error'>
+                    To date can't be earlier than From date
+                  </div>
+                    : <div className='info'>Number of days: {daysDifference}</div>}
+                </div>
+                {/* </div> */}
+
+
+                <div className="form-row">
+                  <label>Registration Number of Association / Organization with evidence (attach documents)</label>
+                  <div className='dual_column_input'>
+                    <input
+                      type="text"
+                      value={registrationNumber}
+                      // value={RegistrationNumberregex}
+
+                      onChange={handleRegistrationNumChange}
+                    // onChange={(e)=>{setRegistrationNumber(e.target.value)}}
+                    />
+                    <input
+                      type="file"
+                      accept="application/pdf"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file.size < 3000000) {
+                          setPDF1(file);
+                        } else {
+                          console.log('Size too big, select a smaller file');
+                        }
+                      }}
+                      multiple
+                      className="file-input inputFile"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div className='formWrap3' style={{ margin: '20px 0 0px' }}>
+                {/* <div className='formWrap'> */}
+                <div className="form-row">
+
+                  <label>Venue of the CME / Workshop / Seminar / Conference / Training programme</label>
+                  <input
+                    type="text" placeholder='Venue'
+                    value={venue}
+                    onChange={handleVenueChange}
+                  />
+                  {venueError && <span className="error">{venueError}</span>}
+
+
+                </div>
+
+                <div className="form-row">
+                  <label>Expected number of attending delegates</label>
+                  <input
+                    type="number"
+                    value={delegates}
+                    onChange={handleDelegatesChange}
+                  />
+                  {delegatesError && <span className="error">{delegatesError}</span>}
+                </div>
+
+
+
+
+
+                {/* </div> */}
+                <div className="form-row">
+                  <label>Expected No. of Hours</label>
+                  <input
+                    type="number"
+                    value={hours}
+                    onChange={handleHoursChange}
+                  />
+                  {hoursError && <span className="error">{hoursError}</span>}
+
+                </div>
+                
+              </div>
+
+
+              <div className='formWrap'>
+
+                <div className="form-row">
+                  <label>List of the Faculty with detailed qualification and experience.</label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file.size < 3000000) {
+                        setPDF2(file);
+                      } else {
+                        console.log('Size too big, select a smaller file');
+                      }
+                    }}
+                    multiple
+                    className="file-input inputFile"
+                  />
+                </div>
+
+
+
+                <div className="form-row">
+
+                  <label>List of Topics</label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file.size < 3000000) {
+                        setPDF4(file);
+                      } else {
+                        console.log('Size too big, select a smaller file');
+                      }
+                    }}
+                    multiple
+                    className="file-input"
+                  />
+                </div>
+
+
+
+
+
+              </div>
+
+              {/* <div className='formWrap'> */}
+              <div className='formWrap'>
+                <div className="form-row">
+                  <label>Exercises to be covered in the CME / Workshop / Seminar / Training Programme</label>
+                  <input
+                    type="text"
+                    value={exercise}
+                    onChange={(e) => setExercise(e.target.value)}
+                  />
+                </div>
+
+                <div className="form-row">
+                  <label>Detailed programme schedule mentioning time, subject and the name of the Speaker</label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file.size < 3000000) {
+                        setPDF3(file);
+                      } else {
+                        console.log('Size too big, select a smaller file');
+                      }
+                    }}
+                    multiple
+                    className="file-input"
+                  />
+                </div>
+                
+              </div>
+              {/* </div> */}
+
+
+              <div className='formWrap'>
+                <div className="form-row">
+                  <label>Name of the Organizing Chairman</label>
+                  <input
+                    type="text"
+                    value={chairman}
+                    onChange={(e) => setChairman(e.target.value)}
+                  />
+                </div>
+                <div className='form-row'>
+                  <label>Medical Registration Certificate of the Organizing Chairman</label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file.size < 3000000) {
+                        setPDF5(file);
+                      } else {
+                        console.log('Size too big, select a smaller file');
+                      }
+                    }}
+                    multiple
+                    className="file-input"
+                  />
+                </div>
+
+                {/*  */}
+                <div className="form-row">
+                  <label>Name of the Organizing Secretary</label>
+                  <input
+                    type="text"
+                    value={secretary}
+                    onChange={(e) => setSecretary(e.target.value)}
+                  />
+                </div>
+
+                <div className='form-row'>
+                  <label>Medical Registration Certificate of the Organizing Secretary</label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file.size < 3000000) {
+                        setPDF6(file);
+                      } else {
+                        console.log('Size too big, select a smaller file');
+                      }
+                    }}
+                    multiple
+                    className="file-input"
+                  />
+
+                </div>
+              </div>
+
+
               <div className="form-row">
-                <label>Permission Date</label>
-                <input
-                  type="date"
-                  value={permissionDate}
-                  onChange={(e) => setPermissionDate(e.target.value)}
+                <label>Methodology to be adopted by the Organization viz. Lecture / Workshop / Hands On Training / Discussion / Audio- Visual Presentation etc.</label>
+                <textarea
+                  value={methodology}
+                  onChange={(e) => setMethodology(e.target.value)}
                 />
               </div>
+
+              <div className='form-row'>
+                <label>Is there any International Faculty Involved?</label>
+                <div className='form-flex'>
+                  <input
+                    type="radio"
+                    name='isInternationalFaculty'
+                    id='yes'
+                    value="Yes"
+                    checked={isInternationalFaculty === 'Yes'}
+                    onChange={(e) => setIsInternationalFaculty(e.target.value)}
+                  />
+                  <label htmlFor="yes" className='cursor-pointer'>Yes</label>
+
+                  <input
+                    type="radio"
+                    name='isInternationalFaculty'
+                    id='no'
+                    value="No"
+                    checked={isInternationalFaculty === 'No'}
+                    onChange={(e) => setIsInternationalFaculty(e.target.value)}
+                  />
+                  <label htmlFor="no" className='cursor-pointer'>No</label>
+                </div>
+              </div>
+
+              {isInternationalFaculty === 'Yes' && (
+                <div className='formWrap'>
+                  <div className="form-row">
+                    <label>Prior Permission of MCI in case of Foreign faculties (if applicable)</label>
+                    <input
+                      type="text"
+                      value={permissionNumber}
+                      onChange={(e) => setPermissionNumber(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-row">
+                    <label>Permission Date</label>
+                    <input
+                      type="date"
+                      value={permissionDate}
+                      onChange={(e) => setPermissionDate(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="form-row">
+                <label>If Any Other Supporting Documents</label>
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file.size < 3000000) {
+                      setPDF7(file);
+                    } else {
+                      console.log('Size too big, select a smaller file');
+                    }
+                  }}
+                  multiple
+                  className="file-input"
+                />
+              </div>
+
+              <button type="submit"
+                className="submit-button"
+              // onClick={handleSubmit}
+              >Submit</button>
+            </form>
             </div>
-          )}
+            :<div>
+              OTP SENT TO EMAIL ID
+              <input type="number" />
+                enter OTP
+                <button 
+                // onClick={}
+                >Submit OTP and Proceed To payment</button>
+              </div>
+              
+            }
+        </div>
 
-          <div className="form-row">
-            <label>If Any Other Supporting Documents</label>
-            <input
-              type="file"
-              onChange={(e) => handleFileChange(e, setSupportingFiles)}
-              multiple
-              className="file-input"
-            />
-          </div>
+      </div >
 
-          <button type="submit"
-            className="submit-button"
-          // onClick={handleSubmit}
-          >Submit</button>
-        </form>
-      </div>
-
-    </div>
+      <Footer />
+    </>
   )
 }
 

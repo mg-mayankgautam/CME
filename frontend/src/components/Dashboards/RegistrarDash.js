@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Dashboard.css'
-import Nav from '../Nav/Nav'
+import AdminNav from '../Nav/AdminNav'
 
 
 const RegistrarDash = () => {
@@ -10,7 +10,7 @@ const RegistrarDash = () => {
 
     return (
         <div className=''>
-            <Nav />
+            <AdminNav />
 
             <div className='Dashboard'>
                 <div className='sideBar'>

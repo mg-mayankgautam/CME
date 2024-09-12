@@ -20,7 +20,7 @@ app.use(cors(
     {
         // origin: process.env.FRONTEND_URL, 
         
-        origin: "http://localhost:3000",
+        origin: "http://localhost:3009",
         // origin: '*',
         credentials: true,
         withCredentials: true
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
     res.setHeader(
         "Access-Control-Allow-Origin",
      
-        "http://localhost:3000"
+        "http://localhost:3009"
     );
     res.header('Access-Control-Allow-Credentials', true);
     res.setHeader(

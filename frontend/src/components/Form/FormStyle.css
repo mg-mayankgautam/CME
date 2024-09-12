@@ -1,22 +1,18 @@
 .formPage {
   padding: 0 0px 64px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  background-color: #F2F6FF;
 }
 
 .form-header {
-  min-height: 180px;
+  min-height: 100px;
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
-  /* justify-content: space-evenly; */
   justify-content: center;
   gap: 64px; 
   font-size: 48px; 
   color: white;
   background: linear-gradient(to right, #031d60, #03267c);
-  padding: 32px 64px;
+  padding: 20px 64px;
   text-align: center;
 }
 
@@ -24,21 +20,28 @@
   height: 120px;
 }
 
-
+.formPageContainer{
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 40px; */
+  width: calc(100% - 64px);
+}
 
 
 /* form css written below */
 
 
 .form-container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px 64px;
-  /* background-color: #f5f5f5; */
-  border-radius: 8px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  margin: 16px 0px;
+  padding: 32px 40px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: rgba(35, 28, 99, .7);
   font-size: 0.8rem;
+  align-self: center;
+  max-width: 1000px;
 }
 
 .form-container> form{
@@ -47,22 +50,40 @@
   gap: 40px;
 }
 
+.formSubHead{
+  font-size: 28px;
+  font-weight: 700;
+  margin: 48px 0px 0;
+  padding: 0px 0px;
+  border-radius: 12px;
+  color: rgba(35, 28, 99, .7);
+  align-self: center;
+  width: 100%;
+  max-width: 1080px;
+}
+
 
 .formWrap{
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
 }
-.formWrap>.form-row{
+/* .formWrap>.form-row{
   width: calc(50% - 20px);
-}
+} */
 
+.formWrap3{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
 .form-row {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   justify-content: space-between;
+  position: relative;
 }
 
 /* this css is used in radio buttons, international faculty */
@@ -80,41 +101,43 @@
 .form-row label {
   /* margin-bottom: 5px; */
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .form-row input {
-  padding: 10px;
+  padding: 6px 12px;
   border-radius: 0.25rem;
   border: 1px solid #dce7f1;
-  width: calc(100% - 20px);
+  width: calc(100% - 24px);
   font-size: 0.8rem !important;
+  background-color: #F2F6FF;
   color: #607080;
 }
 
 .form-row textarea {
-  padding: 10px;
+  padding: 6px 12px;
   border-radius: 0.25rem;
   border: 1px solid #dce7f1;
-  max-width: calc(100% - 20px);
+  background-color: #F2F6FF;
+  max-width: calc(100% - 24px);
   font-size: 0.8rem !important;
   color: #607080;
 }
 
-.form-row select {
-  padding: 10px;
+/* .form-row select {
+  padding: 6px 12px;
   border-radius: 0.25rem;
   border: 1px solid #dce7f1;
-  width: calc(100% - 20px);
+  width: calc(100% - 24px);
   font-size: 0.8rem !important;
   color: #607080;
-}
+} */
 
 .faculty-inputs input {
-  padding: 10px;
+  padding: 6px 12px;
   border-radius: 0.25rem;
   border: 1px solid #dce7f1;
-  width: calc(100% - 20px);
+  width: calc(100% - 24px);
   font-size: 0.8rem !important;
   color: #607080;
 }
@@ -142,23 +165,42 @@
 } */
 
 .date_input_div {
-  display: flex;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .date_input_div_inner {
-  width: calc(50% - 20px);
+  width: calc(100%);
   font-size: 14px !important;
 
 }
 
 .dual_column_input {
-  display: flex;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 
 
 .error{
-  color: #a00202 !important;
+  color: red !important;
+  position: absolute;
+  bottom: -18px;
+}
+
+.info{
+  color: rgb(0, 0, 0) !important;
+  position: absolute;
+  bottom: -18px;
+}
+
+.file-input{
+  padding: 3px 12px !important;
+}
+
+input#file-upload-button{
+  color: red !important;
+  background-color: red !important;
 }

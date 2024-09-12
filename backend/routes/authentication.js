@@ -17,6 +17,7 @@ router.post('/addformdata',upload.any("PDF"),authController.submitformdata)
 
 // router.post('/addrecruitingcompany',upload.array("image"), authController.addRecruitingCompany)
 router.post('/login',authController.login)
+router.post('/logout',authController.logout)
 router.get('/getallforms',verifyJWT,authController.getallforms)
 
 

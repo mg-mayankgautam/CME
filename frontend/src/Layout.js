@@ -20,7 +20,7 @@ const Layout = () => {
   
   useEffect(() => {
 
-      console.log('auth hai ki nahi',auth)
+      // console.log('auth hai ki nahi',auth)
       const checkauthentication = async () => {
           try {
 
