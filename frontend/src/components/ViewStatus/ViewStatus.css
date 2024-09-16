@@ -1,0 +1,13 @@
+.ViewStatusPage{
+    padding: 64px;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+}
+.ViewStatus{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 800px;
+    flex-grow: 1;
+}

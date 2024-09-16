@@ -69,8 +69,8 @@ const Login = () => {
     console.log(id, password)
 
     try {
-       const response = await axios.post('http://localhost:4700/signup',{ id, password,role:'REGISTRAR' });
-     // roles->>> ['CLERK','REGISTRAR']
+       const response = await axios.post('http://localhost:4700/signup',{ id, password,role:'PRESIDENT' });
+     // roles->>> ['CLERK','REGISTRAR','ACCOUNTANT','PRESIDENT']
 
     }catch(e){console.log(e)}
   };
@@ -100,7 +100,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button onClick={handleloginSubmit}>Log In</button>
-            {/* <button onClick={handlesignupSubmit}>Log In</button> */}
+            {/* <button onClick={handlesignupSubmit}>Sign up</button> */}
 
           <div className='signUpLink'>
             Don't have an account? <Link to='/Form'>Sign Up</Link> or Go to <Link to='/'>Home</Link>

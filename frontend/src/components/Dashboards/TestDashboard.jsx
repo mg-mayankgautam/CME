@@ -4,6 +4,8 @@ import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import ClerkDash from './ClerkDash';
 import RegistrarDash from './RegistrarDash';
+import PresidentDash from './PresidentDash';
+import AccountantDash from './AccountantDash';
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 const TestDashboard = () => {
@@ -63,6 +65,8 @@ const TestDashboard = () => {
 
             {auth.role === 'CLERK' && <ClerkDash />}
             {auth.role === 'REGISTRAR' && <RegistrarDash />}
+            {auth.role === 'PRESIDENT' && <PresidentDash/>}
+            {auth.role === 'ACCOUNTANT' && <AccountantDash />}
         </div>
     )
 }

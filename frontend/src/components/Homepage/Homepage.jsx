@@ -1,11 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Homepage.css'
 import logo from '../../assets/hmcLogoBlue.png'
 import Nav from '../Nav/Nav'
 import Footer from '../Footer/Footer'
 
 const Homepage = () => {
+
+  const [registrationNumber, setRegistrationNumber] = useState();
+  const navigate = useNavigate();
+
+  const viewStatus= ()=>{
+    // if(registrationNumber){
+      navigate('/viewregistrationstatus')
+    // }
+  }
+
   return (
 
     <>
@@ -25,8 +35,15 @@ const Homepage = () => {
           </div>
 
           <div className='viewStatusFlex'>
-            <input placeholder='Enter Registration Number' />
-            <button className='home-button'>View Status</button>
+            <input placeholder='Enter Registration Number' 
+              type='number'
+              onChange={(e) => setRegistrationNumber(e.target.value)}
+              required
+              value={registrationNumber}
+            />
+            <button className='home-button' onClick={()=> viewStatus()}>
+              View Status
+            </button>
           </div>
 
         </div>

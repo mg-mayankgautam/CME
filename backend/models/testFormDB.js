@@ -8,6 +8,7 @@ const testformdataSchema = new Schema({
     organizationName: {type:String},
     pdfURL:{type:Array},
     approvals:{type:Object},
+    time: {type: String},
 });
 
 module.exports =mongoose.model('testformdata', testformdataSchema);

@@ -29,12 +29,12 @@ const Layout = () => {
                const token = response.data.accessToken;
               // // Split the token and taken the second
 
-               const base64Url = token.split(".")[1];
+               const base64Url = token?.split(".")[1];
 
               // // Replace "-" with "+"; "_" with "/"
-              const base64 = base64Url.replace("-", "+").replace("_", "/");
+              const base64 = base64Url?.replace("-", "+").replace("_", "/");
 
-               const TokenDataWithoutToken = JSON.parse(window.atob(base64));
+               const TokenDataWithoutToken = JSON.parse(window?.atob(base64));
              console.log('Response:', TokenDataWithoutToken);
 
              const Role = TokenDataWithoutToken.role

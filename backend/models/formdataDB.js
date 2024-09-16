@@ -23,7 +23,10 @@ const formdataSchema = new Schema({
     internationalPermissionNumber: {type:String},
     internationalPermissionDate: {type:String},
     pdfURL:{type:Array},
-    approvals:{type:Object}
+    approvals:{type:Object},
+    alldocsverified:{type:Boolean},
+    time: {type: String},
+    date: {type: String},
 });
 
 module.exports =mongoose.model('formdata',formdataSchema );

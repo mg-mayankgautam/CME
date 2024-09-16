@@ -19,6 +19,18 @@ router.post('/addformdata',upload.any("PDF"),authController.submitformdata)
 router.post('/login',authController.login)
 router.post('/logout',authController.logout)
 router.get('/getallforms',verifyJWT,authController.getallforms)
+router.get('/getformdata',verifyJWT,authController.getfromdata)
+
+router.post('/docapproval',verifyJWT,authController.docApproval)
+router.post('/docapprovalall',verifyJWT,authController.docApprovalAll)
+
+router.post('/Presidentapproval',verifyJWT,authController.PresidentAproval)
+router.post('/Registrarapproval',verifyJWT,authController.RegistrarAproval)
+
+// router.post('/generatecertificate',verifyJWT,authController.generateCertificate)
+
+
+
 
 
 

@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import './Dashboard.css'
+import AdminNav from '../Nav/AdminNav'
+
+import './Dashboard.css'
 // import Nav from '../Nav/Nav'
 import { useEffect } from 'react'
 import axios from 'axios'
 import useAuth from '../../hooks/useAuth';
-import AdminNav from '../Nav/AdminNav'
+
 import { Link } from 'react-router-dom';
 
 
-const RegistrarDash = () => {
+const PresidentDash = () => {
 
     const [showNewApprovals, setShowNewApprovals] = useState(true)
     const [showPrevApprovals, setShowPrevApprovals] = useState(false)
@@ -67,7 +70,7 @@ const RegistrarDash = () => {
                 </div>
 
                 <div className='mainBar'>
-                    <div className='dashMainHeading'>Registrar Dashboard</div>
+                    <div className='dashMainHeading'>President Dashboard</div>
 
                     {/* {!viewNewApprovalentry?         */}
                     {showNewApprovals ?
@@ -78,7 +81,7 @@ const RegistrarDash = () => {
 
                                 {Approvals && Approvals.length > 0 ?
                                     (Approvals
-                                        .filter(item => item.approvals.registrar === false)
+                                        .filter(item => item.approvals.president === false)
                                         .map((item, i) => (
                                             <div key={i} className='approval'>
                                                 <div className='approvalContent'>
@@ -87,7 +90,7 @@ const RegistrarDash = () => {
                                                     <div><strong>Dates:</strong> {item.cmeStartDate} to {item.cmeEndDate}</div>
                                                 </div>
 
-                                                <Link to={`/dashboard/registrar/${item._id}`} key={item._id}>
+                                                <Link to={`/dashboard/president/${item._id}`} key={item._id}>
                                                     <button>
                                                         View
                                                     </button>
@@ -112,7 +115,7 @@ const RegistrarDash = () => {
 
                                 {Approvals && Approvals.length > 0 ?
                                     (Approvals
-                                        .filter(item => item.approvals.registrar === true)
+                                        .filter(item => item.approvals.president === true)
                                         .map((item, i) => (
                                             <div key={i} className='approval'>
                                                 <div className='approvalContent'>
@@ -121,7 +124,7 @@ const RegistrarDash = () => {
                                                     <div><strong>Dates:</strong> {item.cmeStartDate} to {item.cmeEndDate}</div>
                                                 </div>
 
-                                                <Link to={`/dashboard/registrar/${item._id}`} key={item._id}>
+                                                <Link to={`/dashboard/president/${item._id}`} key={item._id}>
                                                     <button>
                                                         View
                                                     </button>
@@ -150,4 +153,4 @@ const RegistrarDash = () => {
     )
 }
 
-export default RegistrarDash
+export default PresidentDash

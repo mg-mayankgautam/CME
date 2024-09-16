@@ -45,7 +45,7 @@ const Form = () => {
 
 
 
-  const [otpInput, setOtpInput] = useState('false')
+  const [otpInput, setOtpInput] = useState(false)
 
 
   //below states are for checking file size limits
@@ -405,7 +405,7 @@ const Form = () => {
                           console.log('Size too big, select a smaller file');
                         }
                       }}
-                      multiple
+                      // multiple
                       className="file-input inputFile"
                     />
                   </div>
@@ -473,7 +473,7 @@ const Form = () => {
                         console.log('Size too big, select a smaller file');
                       }
                     }}
-                    multiple
+                    // multiple
                     className="file-input inputFile"
                   />
                 </div>
@@ -494,7 +494,7 @@ const Form = () => {
                         console.log('Size too big, select a smaller file');
                       }
                     }}
-                    multiple
+                    // multiple
                     className="file-input"
                   />
                 </div>
@@ -529,7 +529,7 @@ const Form = () => {
                         console.log('Size too big, select a smaller file');
                       }
                     }}
-                    multiple
+                    // multiple
                     className="file-input"
                   />
                 </div>
@@ -560,7 +560,7 @@ const Form = () => {
                         console.log('Size too big, select a smaller file');
                       }
                     }}
-                    multiple
+                    // multiple
                     className="file-input"
                   />
                 </div>
@@ -588,7 +588,7 @@ const Form = () => {
                         console.log('Size too big, select a smaller file');
                       }
                     }}
-                    multiple
+                    // multiple
                     className="file-input"
                   />
 
@@ -663,7 +663,7 @@ const Form = () => {
                       console.log('Size too big, select a smaller file');
                     }
                   }}
-                  multiple
+                  // multiple
                   className="file-input"
                 />
               </div>
